@@ -18,9 +18,9 @@
     <title>Hello, world!</title>
 </head>
 
-<body>
+<body id="home" data-spy="scroll" data-target="#main-nav">
     <!-- NAVIGATION block-->
-    <nav class="navbar navbar-expand-md navbar-light fixed-top py-4">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top py-4" id="main-nav">
         <div class="container">
             <a href="#home" class="navbar-brand">
                 <img src="img/mlogo.png" width="50" height="50" alt="Brand logo">
@@ -424,7 +424,7 @@
                 <div class="col-md-6 ml-auto">
                     <p class="lead">
                         Copyright ©
-                        <span id="year">2020</span>
+                        <span id="year"></span>
                     </p>
                 </div>
             </div>
@@ -441,6 +441,29 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script>
+        // Get the current year for the copyright
+        $('#year').text(new Date().getFullYear());
+
+        //Init Scrollspy
+        $('body').scrollspy({
+            target: '#main-nav'
+        })
+
+        //Smooth Scrolling
+        $('#main-nav a').on('click', function (evt) {
+            if (this.hash !== '') {
+                event.preventDefault();
+                const hash = this.hash;
+
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800, function () {
+                    window.location.hash = hash;
+                });
+            }
+        });
     </script>
 </body>
 
